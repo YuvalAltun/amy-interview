@@ -19,6 +19,7 @@ router.get('/', async (req, res, next) => {
 
     // run the sugestion function
     const results = await dataService.getSugestion(q, latitude, longitude);
+    
     // return the result
     res.status(200).json(results);
 

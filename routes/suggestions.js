@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
     const results = await dataService.getSugestion(q, latitude, longitude);
     
     // return the result
-    res.status(200).json(results);
+    res.status(200).json({suggestions: results});
 
   } catch (error) {
     next ({message: 'somthing went wrong'});

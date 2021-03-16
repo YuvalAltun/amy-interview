@@ -12,7 +12,7 @@ module.exports.jsonResultsConvertor = (results) => {
         {
             name: `${x.name}${x.feat_code ? ', ' + x.feat_code : ''}${x.country ? ', ' + x.country : ''}`, 
             latitude: x.lat,
-            longitude: x.longitude
+            longitude: x.long
         }));
 }
 

@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
+const config = require('./config');
 
 var indexRouter = require('./routes/index');
 var suggestionsRouter = require('./routes/suggestions');
@@ -14,6 +16,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', config.AccessControlAllowOrigin);
+  res.header('Access-Control-Allow-Headers', config.AccessControlAllowHeaders);
+  // in case of options request/preflight
+  if (req.method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Methods', config.AccessControlAllowMethods);
+      return res.status(200).json({});
+  }
+  next();
+});
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
